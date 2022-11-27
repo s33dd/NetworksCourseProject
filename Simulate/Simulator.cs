@@ -44,6 +44,7 @@ namespace Simulate {
             tmp = currentValue;
           }
         }
+        Console.WriteLine(currentValue);
         //Check for pause
       }
     }
