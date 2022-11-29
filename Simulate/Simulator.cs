@@ -12,7 +12,7 @@ namespace Simulate {
     public int CurrentValue {
       get { return currentValue; }
     }
-    public void Simulate(int expected) {
+    public void Simulate(int expected, Connection conn) {
       bool wasAnomaly = false;
       int tmp = currentValue;
       Random Randomizer = new Random();
@@ -44,7 +44,15 @@ namespace Simulate {
             tmp = currentValue;
           }
         }
-        Console.WriteLine(currentValue);
+        try {
+          int bytes = conn.Send(currentValue);
+          Console.WriteLine("Sended {0} bytes", bytes);
+        }
+        catch (Exception ex) {
+          Console.WriteLine(ex.ToString());
+          conn.Close();
+          return;
+        }
         //Check for pause
       }
     }
