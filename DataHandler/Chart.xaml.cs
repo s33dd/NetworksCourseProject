@@ -1,4 +1,5 @@
 ﻿using LiveChartsCore;
+using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.WPF;
 using System;
@@ -24,14 +25,15 @@ namespace DataHandler {
   public partial class Chart : Window {
     private ChartVM chart;
     private ObservableCollection<ISeries> series;
-    private ObservableCollection<double> values;
+    private ObservableCollection<ObservablePoint> values;
     private Connection conn;
+    private double currentX;
     public Chart(Connection conn) {
       InitializeComponent();
       this.conn = conn;
-      values = new ObservableCollection<double>();
+      values = new ObservableCollection<ObservablePoint>();
       series = new ObservableCollection<ISeries>();
-      var lineSerie = new ScatterSeries<double>();
+      var lineSerie = new ScatterSeries<ObservablePoint>();
       lineSerie.Values = values;
       lineSerie.Fill = null;
       lineSerie.Name = "Sensor data";
@@ -42,6 +44,7 @@ namespace DataHandler {
       chart.YAxes = new Axis[] { new Axis() };
       chart.Series = series;
       DataContext = chart;
+      currentX = 0;
     }
 
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
@@ -50,7 +53,7 @@ namespace DataHandler {
 
     private void Window_Loaded(object sender, RoutedEventArgs e) {
       conn.Bind();
-      Thread reciever = new Thread(new ThreadStart(() => conn.ListenRecieve(values)));
+      Thread reciever = new Thread(new ThreadStart(() => conn.ListenRecieve(values, ref currentX)));
       reciever.Start();
       MessageBox.Show("Started listening");
     }
