@@ -23,37 +23,17 @@ namespace DataHandler {
   /// Interaction logic for MainWindow.xaml
   /// </summary>
   public partial class MainWindow : Window {
-    private ChartVM chart;
-    private ObservableCollection<ISeries> series;
-    private ObservableCollection<double> values;
-
     public MainWindow() {
       InitializeComponent();
-      values = new ObservableCollection<double>();
-      series = new ObservableCollection<ISeries>();
-/*      var lineSerie = new LineSeries<double>();
-      lineSerie.Values = values;
-      lineSerie.Fill = null;
-      lineSerie.Name = "Sensor data";
-      lineSerie.GeometrySize = 0;
-      series.Add(lineSerie);*/
-      chart = new ChartVM();
-      chart.Series = series;
-      DataContext = chart;
     }
 
     private void ConnectBtn_Click(object sender, RoutedEventArgs e) {
       if (Connection.DataCorrect(IPBox.Text, PortBox.Text)) {
-        Connection connection = new Connection();
-        if (connection.TryConnect(IPBox.Text, PortBox.Text)) {
-          //Продолжение
-          ErrorLabel.Content = string.Empty;
-          ErrorLabel.Content = "Connection established";
-        }
-        else {
-          ErrorLabel.Content = string.Empty;
-          ErrorLabel.Content = "Connection failed";
-        }
+        Connection connection = new Connection(IPBox.Text, PortBox.Text);
+        //Продолжение
+        Chart window = new Chart(connection);
+        window.Show();
+        Close();
       }
       else {
         ErrorLabel.Content = string.Empty;

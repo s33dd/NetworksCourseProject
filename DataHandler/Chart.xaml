@@ -6,12 +6,26 @@
         xmlns:local="clr-namespace:DataHandler"
         xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         mc:Ignorable="d"
-        Title="Chart" Height="450" Width="800">
-  <Grid>
-    <lvc:CartesianChart Series="{Binding Series}"
+        Title="Chart" Height="450" Width="800" Closing="Window_Closing" Loaded="Window_Loaded">
+  <Grid ShowGridLines="True">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="5*"></RowDefinition>
+      <RowDefinition></RowDefinition>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition></ColumnDefinition>
+      <ColumnDefinition></ColumnDefinition>
+      <ColumnDefinition></ColumnDefinition>
+      <ColumnDefinition></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+    <lvc:CartesianChart x:Name="ChartCanvas" Series="{Binding Series}"
                         TooltipPosition="Hidden" 
                         Margin="10,10,10,10"
-                        ZoomMode="X">
-    </lvc:CartesianChart>
+                        ZoomMode="X"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Grid.Row="0" Grid.ColumnSpan="4"/>
+    <Button x:Name="StopBtn" Content="Stop" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Height="50" Width="120" FontSize="24" Cursor="Hand" Click="StopBtn_Click"/>
+    <Button x:Name="ZoomBtn" Content="Reset zoom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Height="50" Width="130" FontSize="24" Cursor="Hand" Margin="40,0,0,0" Click="ZoomBtn_Click"/>
   </Grid>
 </Window>

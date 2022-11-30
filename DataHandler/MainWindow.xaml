@@ -7,9 +7,9 @@
         Title="MainWindow" Height="450" Width="800">
   <Grid>
     <Button x:Name="ConnectBtn" Content="Connect" Margin="326,0,326,43" Grid.RowSpan="2" Height="63" VerticalAlignment="Bottom" FontSize="20" Click="ConnectBtn_Click"/>
-    <TextBox x:Name="IPBox" Margin="292,73,292,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="39" FontSize="24"/>
+    <TextBox x:Name="IPBox" Margin="292,73,292,0" TextWrapping="Wrap" Text="127.0.0.1" VerticalAlignment="Top" Height="39" FontSize="24"/>
     <Label Content="IP:" HorizontalAlignment="Left" Margin="240,72,0,0" FontSize="24" Height="40" VerticalAlignment="Top"/>
-    <TextBox x:Name="PortBox" Margin="292,137,292,0" TextWrapping="Wrap" Text="" FontSize="24" Height="39" VerticalAlignment="Top"/>
+    <TextBox x:Name="PortBox" Margin="292,137,292,0" TextWrapping="Wrap" Text="1010" FontSize="24" Height="39" VerticalAlignment="Top"/>
     <Label Content="Port:" HorizontalAlignment="Left" Margin="229,136,0,0" FontSize="24" Height="40" VerticalAlignment="Top"/>
     <Label x:Name="ErrorLabel" Content="" Margin="130,0,130,135" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFE00B0B" Height="44" VerticalAlignment="Bottom"/>
   </Grid>
