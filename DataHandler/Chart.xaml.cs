@@ -38,6 +38,8 @@ namespace DataHandler {
       lineSerie.GeometrySize = 3;
       series.Add(lineSerie);
       chart = new ChartVM();
+      chart.XAxes = new Axis[] { new Axis() };
+      chart.YAxes = new Axis[] { new Axis() };
       chart.Series = series;
       DataContext = chart;
     }
@@ -58,7 +60,10 @@ namespace DataHandler {
     }
 
     private void ZoomBtn_Click(object sender, RoutedEventArgs e) {
-      
+      chart.XAxes[0].MinLimit = null;
+      chart.YAxes[0].MinLimit = null;
+      chart.XAxes[0].MaxLimit = null;
+      chart.YAxes[0].MaxLimit = null;
     }
   }
 }
