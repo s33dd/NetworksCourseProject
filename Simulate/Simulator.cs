@@ -4,10 +4,10 @@ using System.Threading;
 namespace Simulate {
   internal class Simulator {
     private int currentValue;
-    private bool isPaused;
+    private bool stop;
     public Simulator() { 
       currentValue = 0;
-      isPaused = false;
+      stop = false;
     }
     public int CurrentValue {
       get { return currentValue; }
@@ -16,7 +16,7 @@ namespace Simulate {
       bool wasAnomaly = false;
       int tmp = currentValue;
       Random Randomizer = new Random();
-      while (!isPaused) {
+      while (!stop) {
         Thread.Sleep(5000);
         int anomaly = Randomizer.Next(0, 100);
         if (anomaly > 95) {
@@ -53,7 +53,7 @@ namespace Simulate {
           conn.Close();
           return;
         }
-        //Check for pause
+        stop = conn.Recieve();
       }
     }
   }

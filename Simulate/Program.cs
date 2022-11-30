@@ -28,6 +28,7 @@ namespace Simulate {
       Thread simulator = new Thread(new ThreadStart(() => Simulating(expected, conn)));
       simulator.Start();
       simulator.Join();
+      conn.Close();
     }
   }
 }

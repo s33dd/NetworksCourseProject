@@ -65,5 +65,14 @@ namespace Simulate {
       socket.Shutdown(SocketShutdown.Both);
       socket.Close();
     }
+    public bool Recieve() {
+      try {
+        socket.Receive(buffer);
+        return BitConverter.ToBoolean(buffer, 0);
+      }
+      catch {
+        return true;
+      }
+    }
   }
 }
