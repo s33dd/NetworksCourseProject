@@ -46,7 +46,7 @@ namespace Simulate {
         }
         try {
           int bytes = conn.Send(currentValue);
-          Console.WriteLine("Sended {0} bytes", bytes);
+          Console.WriteLine("Sent {0} bytes", bytes);
         }
         catch (Exception ex) {
           Console.WriteLine(ex.ToString());

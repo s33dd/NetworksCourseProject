@@ -57,8 +57,9 @@ namespace DataHandler {
         }
         catch {
           if (!shown) {
-            MessageBox.Show("Error: Client disconnected");
+            MessageBox.Show("Error: Socket disconnected");
             shown = true;
+            stop = true;
           }
         }
       }
