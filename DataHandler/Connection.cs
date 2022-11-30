@@ -1,4 +1,5 @@
-﻿using LiveChartsCore.Defaults;
+﻿using Approximating;
+using LiveChartsCore.Defaults;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,7 +44,7 @@ namespace DataHandler {
       IPEndPoint endPoint = new IPEndPoint(ip, port);
       socket.Bind(endPoint);
     }
-    public void ListenRecieve(ObservableCollection<ObservablePoint> values, ref double currentX) {
+    public void ListenRecieve(ObservableCollection<ObservablePoint> values, ref double currentX, Chart chart) {
       socket.Listen();
       handler = socket.Accept();
       bool shown = false;
@@ -55,6 +56,16 @@ namespace DataHandler {
           double currentY = BitConverter.ToDouble(data, 0);
           currentX += 5; //data is sending every 5 seconds
           ObservablePoint currentValue = new ObservablePoint(currentX, currentY);
+          ObservableCollection<ObservablePoint> localValues = new ObservableCollection<ObservablePoint>();
+          LeastSquares logaritmic = new LeastSquares();
+          LeastSquares linear = new LeastSquares();
+          if (values.Count > 5) {
+            for (int i = 0; i < values.Count; i++) {
+              localValues.Add(values[i]);
+            }
+            chart.DrawLinear(linear, localValues);
+            chart.DrawLog(linear, localValues);
+          }
           values.Add(currentValue);
         }
         catch {

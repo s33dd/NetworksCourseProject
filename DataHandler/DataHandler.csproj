@@ -11,4 +11,10 @@
     <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-beta.601" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Approximating">
+      <HintPath>libs\Approximating.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
