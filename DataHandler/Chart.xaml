@@ -7,7 +7,7 @@
         xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         mc:Ignorable="d"
         Title="Chart" Height="450" Width="800" Closing="Window_Closing" Loaded="Window_Loaded">
-  <Grid ShowGridLines="True">
+  <Grid ShowGridLines="False">
     <Grid.RowDefinitions>
       <RowDefinition Height="5*"></RowDefinition>
       <RowDefinition></RowDefinition>
