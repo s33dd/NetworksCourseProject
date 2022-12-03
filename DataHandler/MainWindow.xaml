@@ -5,12 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-  <Grid>
-    <Button x:Name="ConnectBtn" Content="Connect" Margin="326,0,326,43" Grid.RowSpan="2" Height="63" VerticalAlignment="Bottom" FontSize="20" Click="ConnectBtn_Click"/>
-    <TextBox x:Name="IPBox" Margin="292,73,292,0" TextWrapping="Wrap" Text="127.0.0.1" VerticalAlignment="Top" Height="39" FontSize="24"/>
-    <Label Content="IP:" HorizontalAlignment="Left" Margin="240,72,0,0" FontSize="24" Height="40" VerticalAlignment="Top"/>
-    <TextBox x:Name="PortBox" Margin="292,137,292,0" TextWrapping="Wrap" Text="1010" FontSize="24" Height="39" VerticalAlignment="Top"/>
-    <Label Content="Port:" HorizontalAlignment="Left" Margin="229,136,0,0" FontSize="24" Height="40" VerticalAlignment="Top"/>
-    <Label x:Name="ErrorLabel" Content="" Margin="130,0,130,135" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFE00B0B" Height="44" VerticalAlignment="Bottom"/>
+  <Grid ShowGridLines="False">
+    <Grid.RowDefinitions>
+      <RowDefinition></RowDefinition>
+      <RowDefinition></RowDefinition>
+      <RowDefinition></RowDefinition>
+      <RowDefinition></RowDefinition>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition></ColumnDefinition>
+      <ColumnDefinition></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+    <Button x:Name="ConnectBtn" Content="Connect" Height="60" Width="150" VerticalAlignment="Center" FontSize="20" Click="ConnectBtn_Click" Grid.Row="4" Grid.Column="0"/>
+    <Button x:Name="FileBtn" Content="Draw from file" Height="60" Width="150" VerticalAlignment="Center" FontSize="20" Grid.Row="4" Grid.Column="1"/>
+    <TextBox x:Name="IPBox" TextWrapping="Wrap" Text="127.0.0.1" VerticalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" Width="200" Height="39" FontSize="24"/>
+    <Label Content="IP:" HorizontalAlignment="Center" FontSize="24" Height="40" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+    <TextBox x:Name="PortBox" TextWrapping="Wrap" Text="1010" FontSize="24" Height="39" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" Width="200"/>
+    <Label Content="Port:" HorizontalAlignment="Center" FontSize="24" Height="40" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+    <Label x:Name="ErrorLabel" Content="" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFE00B0B" Height="44" 
+           VerticalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" FontSize="18"/>
   </Grid>
 </Window>
