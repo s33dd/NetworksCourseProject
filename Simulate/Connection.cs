@@ -7,8 +7,10 @@ namespace Simulate {
   public class Connection {
     private byte[] buffer;
     private Socket socket;
-    public Connection() {
-      socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+    public Connection(string ip) {
+      IPHostEntry ipHost = Dns.GetHostEntry(ip);
+      var ipAddr = ipHost.AddressList[0];
+      socket = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
       buffer = new byte[sizeof(double)];
     }
     public static bool DataCorrect(string ip, string port) {

@@ -16,13 +16,13 @@ namespace DataHandler {
     private int port;
     private bool stop;
     public Connection(string ip, string port) {
-      socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
       data = new byte[sizeof(double)];
       IPHostEntry ipHost = Dns.GetHostEntry(ip);
       this.ip = ipHost.AddressList[0];
       int portInt = int.Parse(port);
       this.port = portInt;
       stop = false;
+      socket = new Socket(this.ip.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
     }
     public static bool DataCorrect(string ip, string port) {
       string ipPattern = @"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";

@@ -20,7 +20,7 @@ namespace Simulate {
       } while (!Connection.DataCorrect(ip, port));
       Console.Write("Insert expected value: ");
       int expected = int.Parse(Console.ReadLine());
-      Connection conn = new Connection();
+      Connection conn = new Connection(ip);
       if(!conn.TryConnect(ip, port)) {
         Console.WriteLine("Can`t connect");
         return;
