@@ -36,8 +36,8 @@ namespace DataHandler {
       lineSerie.GeometrySize = 3;
       series.Add(lineSerie);
       chart = new ChartVM();
-      chart.XAxes = new Axis[] { new Axis() };
-      chart.YAxes = new Axis[] { new Axis() };
+      chart.XAxes = new Axis[] { new Axis { Name = "Time, s" } };
+      chart.YAxes = new Axis[] { new Axis { Name = "Temperature, C°" } };
       chart.Series = series;
       DataContext = chart;
       currentX = 0;
