@@ -19,7 +19,7 @@ namespace Approximating {
         xSum += x[i];
         ySum += y[i];
         squareXSum += x[i] * x[i];
-        xySum += x[i] + y[i];
+        xySum += x[i] * y[i];
       }
       double delta = squareXSum * n - xSum * xSum;
       if (delta == 0) {
