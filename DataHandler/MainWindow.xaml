@@ -17,7 +17,7 @@
       <ColumnDefinition></ColumnDefinition>
     </Grid.ColumnDefinitions>
     <Button x:Name="ConnectBtn" Content="Connect" Height="60" Width="150" VerticalAlignment="Center" FontSize="20" Click="ConnectBtn_Click" Grid.Row="4" Grid.Column="0"/>
-    <Button x:Name="FileBtn" Content="Draw from file" Height="60" Width="150" VerticalAlignment="Center" FontSize="20" Grid.Row="4" Grid.Column="1"/>
+    <Button x:Name="FileBtn" Content="Draw from file" Height="60" Width="150" VerticalAlignment="Center" FontSize="20" Grid.Row="4" Grid.Column="1" Click="FileBtn_Click"/>
     <TextBox x:Name="IPBox" TextWrapping="Wrap" Text="127.0.0.1" VerticalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" Width="200" Height="39" FontSize="24"/>
     <Label Content="IP:" HorizontalAlignment="Center" FontSize="24" Height="40" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
     <TextBox x:Name="PortBox" TextWrapping="Wrap" Text="1010" FontSize="24" Height="39" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" Width="200"/>

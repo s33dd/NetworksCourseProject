@@ -18,7 +18,7 @@ namespace DataHandler {
     private ChartVM chart;
     private ObservableCollection<ISeries> series;
     private ObservableCollection<ObservablePoint> values;
-    private Connection conn;
+    private Connection? conn;
     private double currentX;
     private bool logAdded;
     private bool lineAdded;
@@ -46,20 +46,61 @@ namespace DataHandler {
       addLog = false;
       addLine = false;
     }
+    public Chart(string points) {
+      InitializeComponent();
+      values = new ObservableCollection<ObservablePoint>();
+      series = new ObservableCollection<ISeries>();
+      var lineSerie = new ScatterSeries<ObservablePoint>();
+      lineSerie.Values = values;
+      lineSerie.Fill = null;
+      lineSerie.Name = "Sensor data";
+      lineSerie.GeometrySize = 3;
+      series.Add(lineSerie);
+      chart = new ChartVM();
+      chart.XAxes = new Axis[] { new Axis { Name = "Time, s" } };
+      chart.YAxes = new Axis[] { new Axis { Name = "Temperature, C°" } };
+      chart.Series = series;
+      DataContext = chart;
+      currentX = 0;
+      logAdded = false;
+      lineAdded = false;
+      addLog = false;
+      addLine = false;
+
+      string[] coords = points.Split(';');
+      foreach (var coord in coords) {
+        string[] coordValues = coord.Split(' ');
+        try {
+          double x = double.Parse(coordValues[0]);
+          double y = double.Parse(coordValues[1]);
+          values.Add(new ObservablePoint(x, y));
+        }
+        catch {
+          MessageBox.Show("Check data format in file");
+          return;
+        }
+      }
+    }
 
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
-      conn.CloseSock();
+      if (conn != null) {
+        conn.CloseSock();
+      }
     }
 
     private void Window_Loaded(object sender, RoutedEventArgs e) {
-      conn.Bind();
-      Thread reciever = new Thread(new ThreadStart(() => conn.ListenRecieve(values, ref currentX, this)));
-      reciever.Start();
-      MessageBox.Show("Started listening");
+      if (Properties.Settings.Default.needConnection && conn != null) {
+        conn.Bind();
+        Thread reciever = new Thread(new ThreadStart(() => conn.ListenRecieve(values, ref currentX, this)));
+        reciever.Start();
+        MessageBox.Show("Started listening");
+      }
     }
 
     private void StopBtn_Click(object sender, RoutedEventArgs e) {
-      conn.Stop();
+      if (conn != null) {
+        conn.Stop();
+      }
     }
 
     private void ZoomBtn_Click(object sender, RoutedEventArgs e) {
@@ -77,6 +118,12 @@ namespace DataHandler {
         }
         addLine = true;
         addLog = true;
+        LeastSquares logarithmic = new LeastSquares();
+        LeastSquares linear = new LeastSquares();
+        if (!Properties.Settings.Default.needConnection) {
+          DrawLog(logarithmic, values);
+          DrawLinear(linear, values);
+        }
       }
       else if (LogCheck.IsChecked.Value) {
         if (values.Count < 6) {
@@ -84,6 +131,10 @@ namespace DataHandler {
           return;
         }
         addLog = true;
+        LeastSquares logarithmic = new LeastSquares();
+        if (!Properties.Settings.Default.needConnection) {
+          DrawLog(logarithmic, values);
+        }
       }
       else if (LinearCheck.IsChecked.Value) {
         if (values.Count < 6) {
@@ -91,6 +142,10 @@ namespace DataHandler {
           return;
         }
         addLine = true;
+        LeastSquares linear = new LeastSquares();
+        if (!Properties.Settings.Default.needConnection) {
+          DrawLinear(linear, values);
+        }
       }
       else {
         MessageBox.Show("Choose at least one function");

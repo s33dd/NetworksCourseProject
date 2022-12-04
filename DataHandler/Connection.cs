@@ -53,14 +53,14 @@ namespace DataHandler {
           currentX += 5; //data is sending every 5 seconds
           ObservablePoint currentValue = new ObservablePoint(currentX, currentY);
           ObservableCollection<ObservablePoint> localValues = new ObservableCollection<ObservablePoint>();
-          LeastSquares logaritmic = new LeastSquares();
+          LeastSquares logarithmic = new LeastSquares();
           LeastSquares linear = new LeastSquares();
           if (values.Count > 5) {
             for (int i = 0; i < values.Count; i++) {
               localValues.Add(values[i]);
             }
             chart.DrawLinear(linear, localValues);
-            chart.DrawLog(linear, localValues);
+            chart.DrawLog(logarithmic, localValues);
           }
           values.Add(currentValue);
         }
